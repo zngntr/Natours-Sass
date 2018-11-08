@@ -1,0 +1,56 @@
+.btn {
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.5rem 4rem;
+        display: inline-block;
+        border-radius: 10rem;
+        transition: all .2s;
+        position: relative; /* relative yaparak btn::after in buradan referans almasını sağladık */
+        font-size: 1.6rem;
+    }
+
+    &:hover {
+        transform: translateY(-0.3rem);
+        box-shadow: 0 1rem 2rem rgba($color-black, .2);
+
+        &::after {
+            transform: scaleX(1.4) scaleY(1.6); /* boyutu parantez içindeki kadar katlar*/
+            opacity: 0;
+        }
+    }
+
+    &:active {
+        transform: translateY(-0.1rem);
+        box-shadow: 0 .5rem 1rem rgba($color-black, .4);
+    }
+
+    &--white {
+        background-color: $color-white;
+        color:$color-gray-dark;
+
+        &::after {
+            background-color: $color-white;
+        }
+    }
+
+    &::after {
+        content: ""; /* Konulduğu yere yerleşecek yazıuı belirtir. ::after kullanıldığı  zaman gereklidir*/
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 10rem;
+        position: absolute; /* asıl butonun arkasında konumlandırır*/
+        top: 0;
+        left: 0;
+        z-index: -1; /* parçanın yerleşme sırasını belirler (ön-arka olarak)*/
+        transition: all .4s;
+    }
+
+    &--animated {
+        animation: moveInBottom .5s ease-out .75s;
+        /* animasyonu 0% ile en başından başlatır. örneğin buton başlangıçta görünmez animation moveInBottom da belirlenir */
+        animation-fill-mode: backwards;
+    }
+}
